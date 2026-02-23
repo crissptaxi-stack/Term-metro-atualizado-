@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termômetro Diário de Lucro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Animação de pulso para o estado VERMELHO */
+        @keyframes red-pulse-shadow {
+            0% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.4), 0 0 20px rgba(239, 68, 68, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.7), 0 0 30px rgba(239, 68, 68, 0.4); }
+            100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.4), 0 0 20px rgba(239, 68, 68, 0.2); }
+        }
+        .animate-red-pulse {
+            animation: red-pulse-shadow 2s ease-in-out infinite;
+        }
+
+        /* Animação de pulso para o estado ÂMBAR/AMARELO */
+        @keyframes amber-pulse-shadow {
+            0% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), 0 0 20px rgba(245, 158, 11, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.7), 0 0 30px rgba(245, 158, 11, 0.4); }
+            100% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), 0 0 20px rgba(245, 158, 11, 0.2); }
+        }
+        .animate-amber-pulse {
+            animation: amber-pulse-shadow 2s ease-in-out infinite;
+        }
+
+        /* Animação de pulso para o estado ESMERALDA/VERDE (antigo profit-pulse-shadow) */
+        @keyframes emerald-pulse-shadow {
+            0% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.7), 0 0 30px rgba(16, 185, 129, 0.4); }
+            100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.2); }
+        }
+        .animate-emerald-pulse {
+            animation: emerald-pulse-shadow 2s ease-in-out infinite;
+        }
+
+        /* Nova animação de onda de luz para a barra quando o lucro excede a meta */
+        .profit-bar-fill.exceeding-profit::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translateY(-100%); /* Começa acima da barra */
+            animation: profit-shimmer-wave 2s infinite linear;
+        }
+
+        @keyframes profit-shimmer-wave {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); } /* Move para baixo, simulando uma onda */
+        }
+    </style>
+    <script>
+      // Script para aplicar a preferência de tema cedo e evitar FOUC (Flash of Unstyled Content)
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

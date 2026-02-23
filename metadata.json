@@ -1,0 +1,5 @@
+{
+  "name": "Remix: Termômetro Diário de Lucro",
+  "description": "Um aplicativo minimalista para motoristas e profissionais acompanharem seus ganhos diários, visualizando o progresso até o ponto de equilíbrio de R$ 385 e calculando o lucro excedente.",
+  "requestFramePermissions": []
+}
